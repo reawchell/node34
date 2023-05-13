@@ -1,12 +1,13 @@
-const Asignatura = require('../models/asignatura.model')//importa el modelo de mongoose
+
 const express = require('express')
 const router = express.Router()
-
+const {obtenerTdos, crear, apagar} = require('../controllers/asignatura.controller')
+//const { crear } = require('../controllers/alumno.controller')
 
 router.get('/', async(req,res)=>{
     try{
-        const asignatura = await Asignatura.find()
-        res.json(asignatura)
+        const asignaturas = await obtenerTdos()
+        res.json(asignaturas)
     }catch(error){
         res.status(500)
         res.json({msg: 'Há ocurrido un fallo'})
@@ -17,10 +18,7 @@ router.get('/', async(req,res)=>{
 router.post('/', async (req,res)=>{
     try{
        //console.log(req.body)
-        const nuevaAsignatura = new Asignatura({
-            nombre: req.body.nombre,   // recordar que aqui tiene que ir lo que va en el MODELO
-        })
-        await nuevaAsignatura.save()
+        const nuevaAsignatura = await crear(req.body)
         res.json(nuevaAsignatura)
     }catch (error){
         res.status(500)
@@ -31,9 +29,8 @@ router.post('/', async (req,res)=>{
 router.delete('/:id', async (req,res)=>{
     try {
         //await Asignatura.deleteOne({_id: req.params.id})
-       const result = await Asignatura.findByIdAndDelete(req.params.id)
+       const resultado = await apagar(req.params.id)
         res.json({msg: 'result'})
-
     } catch (error) {
         res.status(500)
         res.json({msg: 'Há ocurrido un fallo'}) 

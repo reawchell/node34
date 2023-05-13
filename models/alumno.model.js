@@ -13,8 +13,16 @@ const alumnoSchema = new mongoose.Schema({
         required: true,
         type: Number,
     },
+    esAdmin:{
+        type: Boolean,
+    },
     apellidos:{
         type: String,
+    },
+    // direccion es un fichero separado de alumno, se vincula a seguir
+    direccion:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Direccion"
     }
 })
 

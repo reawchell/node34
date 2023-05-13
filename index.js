@@ -5,7 +5,7 @@ const server = express()
 const alumnoRoutes = require('./routes/alumno.routes')
 const asignaturaRoutes = require('./routes/asignatura.routes')
 const profesorRoutes = require('./routes/profesor.routes')
-
+const direccionRoutes = require('./routes/direccion.routes')
 
 const router = express.Router()
 
@@ -27,7 +27,7 @@ server.use('/', router)
 server.use('/alumnos',alumnoRoutes)
 server.use('/profesores',profesorRoutes)    
 server.use('/asignatura',asignaturaRoutes)
-
+server.use('/direcciones',direccionRoutes)
 
 
 server.listen(4000, ()=>{
