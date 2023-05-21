@@ -1,7 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const server = express()
+const cors = require('cors')
 
+server.use(cors())
 const alumnoRoutes = require('./routes/alumno.routes')
 const asignaturaRoutes = require('./routes/asignatura.routes')
 const profesorRoutes = require('./routes/profesor.routes')

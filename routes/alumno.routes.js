@@ -43,6 +43,17 @@ router.patch("/:id",esDniValido, esModificacionAceptada,async(req,res)=>{
         res.status(500)
         res.json({msg: 'Ha ocurrido un fallo'})
     }
+
+    router.delete("/:id", async (req, res) => {
+        try {
+          await apagar(req.params.id)
+          res.json({ msg: "Eliminado!" })
+        } catch (error) {
+          res.status(500)
+          res.json({ msg: "Há ocurrido un fallo" })
+        }
+      })
+      
 })
 
 module.exports = router
